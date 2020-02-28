@@ -7,6 +7,12 @@ pipeline {
             git credentialsId: 'git', url: 'https://github.com/darjiniraj/spring-boot-swagger'
          }
       }
+	  
+	  stage('Mvn Build') {
+         steps {
+            sh "mvn clean package"
+         }
+      }
    }
 }
 
