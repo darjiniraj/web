@@ -23,6 +23,15 @@ pipeline {
                 sh "docker build . -t darjiniraj/spring-boot:${DOCKER_TAG}"
             }
         }
+		
+		stage('Docker-Hub Push'){
+            steps{
+                withCredentials([string(credentialsId: 'docker-hub', variable: 'dockerPwd')]) {
+                    sh "docker login -u darjiniraj -p ${dockerPwd}"
+                    sh "docker push darjiniraj/spring-boot:${DOCKER_TAG}"
+                }
+            }
+        }
    }
 }
 
